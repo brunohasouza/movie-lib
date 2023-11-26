@@ -17,6 +17,11 @@
         </v-col>
       </template>
     </v-row>
+    <v-row justify="end" v-if="!loading && items.length > 0">
+      <v-col cols="auto">
+        <v-pagination v-model="page" :length="pages" :total-visible="7"></v-pagination>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -34,6 +39,11 @@
       loading: {
         type: Boolean,
         default: false
+      },
+
+      pages: {
+        type: Number,
+        default: 0
       }
     },
 
@@ -44,7 +54,8 @@
 
     data() {
       return {
-        localLoading: this.loading
+        localLoading: this.loading,
+        page: 1
       }
     },
 
@@ -57,23 +68,5 @@
 </script>
 
 <style lang="scss" scoped>
-  .movie-col {
-    flex: 0 0 50%;
-    max-width: 50%;
-
-    @media (min-width: 600px) {
-      flex: 0 0 33.33%;
-      max-width: 33.33%;
-    }
-
-    @media (min-width: 960px) {
-      flex: 0 0 25%;
-      max-width: 25%;
-    }
-
-    @media (min-width: 1264px) {
-      flex: 0 0 20%;
-      max-width: 20%;
-    }
-  }
+@import './MovieGrid.scss';
 </style>

@@ -1,13 +1,13 @@
 <template>
   <v-main>
-    <movie-grid :loading="loading" :items="movies" #default="{ item }">
+    <movie-grid :loading="loading" :items="movies" :pages="pages" #default="{ item }">
       <movie-item
         :poster="item.Poster"
         :genre="item.Year"
         :title="item.Title"
       ></movie-item>
     </movie-grid>
-    <v-snackbar v-model="error" color="error" top multiline>
+    <v-snackbar v-model="error" color="error" top multi-line>
       <p class="title mb-0">{{ errorMessage }}</p>
     </v-snackbar>
   </v-main>
@@ -31,7 +31,7 @@
         errorMessage: '',
         page: 1,
         loading: false,
-        totalPages: 0,
+        pages: 0,
       }
     },
 
@@ -59,20 +59,19 @@
 
           if (Response === 'True') {
             movies = Search
-            this.totalPages = Math.ceil(parseInt(totalResults) / 10)
+            this.pages = Math.ceil(parseInt(totalResults) / 10)
           } else {
             movies = []
-            this.totalPages = 0
+            this.pages = 0
           }
 
           this.loading = false
         } catch (error) {
           movies = []
+          this.pages = 0
           this.errorMessage = this.$t('movies.apiError')
           this.error = true
         }
-
-        console.log(movies)
 
         this.movies = movies
         this.loading = false
