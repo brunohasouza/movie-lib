@@ -1,60 +1,66 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+      <v-container fill-height fluid>
+        <v-row no-gutters justify="center" align="center">
+          <v-col md="6">
+            <v-form ref="searchForm" v-model="valid" @submit.prevent="onSubmit">
+              <v-text-field
+                v-model="search"
+                :rules="searchRules"
+                :placeholder="$t('search.placeholder')"
+                prepend-inner-icon="mdi-magnify"
+                rounded
+                filled
+              ></v-text-field>
+            </v-form>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import { client } from './service/http-client'
 
 export default {
   name: 'App',
 
-  components: {
-    HelloWorld,
+  data: () => ({
+    search: '',
+    valid: true,
+    movies: []
+  }),
+
+  computed: {
+    searchRules() {
+      return [
+        v => {
+          const value = v?.trim()
+
+          return !!value || this.$t('validations.required', { field: 'This field' })
+        }
+      ]
+    }
   },
 
-  data: () => ({
-    //
-  }),
+  methods: {
+    fetchMovies() {
+      client.get(null, {
+        params: {
+          s: 'Guardians',
+          page: 1
+        }
+      }).then(response => console.log(response.data))
+        .catch(err => console.error(err))
+    },
+
+    onSubmit() {
+      const isValid = this.$refs.searchForm.validate()
+      if (!isValid) return
+    }
+  },
 };
 </script>
