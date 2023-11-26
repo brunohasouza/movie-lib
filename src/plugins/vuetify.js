@@ -6,5 +6,8 @@ Vue.use(Vuetify);
 export const vuetify = new Vuetify({
   theme: {
     dark: true
+  },
+  icons: {
+    iconfont: 'mdiSvg'
   }
 });
