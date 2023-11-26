@@ -6,6 +6,11 @@
           <movie-skeleton></movie-skeleton>
         </v-col>
       </template>
+      <template v-else-if="items.length === 0">
+        <v-col cols="auto" class="mx-auto">
+          <no-results></no-results>
+        </v-col>
+      </template>
       <template v-else>
         <v-col v-for="(item, index) in items" :key="index" class="movie-col">
           <slot :item="item"></slot>
@@ -16,7 +21,8 @@
 </template>
 
 <script>
-  import MovieSkeleton from './../MovieSkeleton/MovieSkeleton.vue'
+  import MovieSkeleton from '@/components/MovieSkeleton/MovieSkeleton.vue'
+  import NoResults from '@/components/NoResults/NoResults.vue'
 
   export default {
     props: {
@@ -32,7 +38,8 @@
     },
 
     components: {
-      MovieSkeleton
+      MovieSkeleton,
+      NoResults
     },
 
     data() {
