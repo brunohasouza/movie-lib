@@ -17,6 +17,13 @@
     background-repeat: no-repeat;
     border-radius: .25rem;
     background-color: var(--poster-bg-color);
+    position: relative;
+  }
+
+  .fav-btn {
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
   }
 
   &__title {

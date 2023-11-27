@@ -12,6 +12,8 @@ export default {
     newSearch: 'New Search',
     results: 'Search for: "{keywords}"',
     total: 'Total results: {number}',
+    removed: 'Movie removed successfully',
+    added: 'Movie added successfully',
     apiError: 'Sorry, an unknown error occurred.',
     notFound: {
       title: 'No Results Found',

@@ -18,11 +18,7 @@
       :pages="pages"
       #default="{ item }"
     >
-      <movie-item
-        :poster="item.Poster"
-        :genre="item.Year"
-        :title="item.Title"
-      ></movie-item>
+      <movie-item :movie="item"></movie-item>
     </movie-grid>
     <v-container class="pt-10" v-if="!loading && movies.length > 0">
       <v-row justify="center">
@@ -36,9 +32,6 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-snackbar v-model="error" color="error" top multi-line>
-      <p class="title mb-0">{{ errorMessage }}</p>
-    </v-snackbar>
   </v-main>
 </template>
 
@@ -61,8 +54,6 @@
     data() {
       return {
         movies: [],
-        error: false,
-        errorMessage: '',
         page: 1,
         totalMovies: 0,
         loading: false,
@@ -115,8 +106,7 @@
         } catch (error) {
           movies = []
           this.totalMovies = 0
-          this.errorMessage = this.$t('movies.apiError')
-          this.error = true
+            this.$toast.error(this.$t('movies.apiError'))
         }
 
         this.movies = movies

@@ -1,35 +1,58 @@
 <template>
   <div class="movie-item" :class="isDark">
-    <span :style="{ backgroundImage: `url('${poster}')` }" class="poster mb-2"></span>
+    <span :style="{ backgroundImage: `url('${movie.Poster}')` }" class="poster mb-2">
+      <v-btn fab small color="red" class="fav-btn" @click="markMovie">
+        <v-icon>{{ icon }}</v-icon>
+      </v-btn>
+    </span>
     <div class="movie-item__title">
-      <p class="text-subtitle-1 font-weight-medium" :title="title">{{ title }}</p>
-      <p class="text-body-1 text--disabled mb-0 year">{{ genre }}</p>
+      <p class="text-subtitle-1 font-weight-medium" :title="movie.Title">{{ movie.Title }}</p>
+      <p class="text-body-1 text--disabled mb-0 year">{{ movie.Year }}</p>
     </div>
   </div>
 </template>
 
 <script>
+  import { mapActions, mapState } from 'vuex'
+
   export default {
     props: {
-      poster: {
-        type: String,
+      movie: {
+        type: Object,
         required: true
       },
-
-      title: {
-        type: String,
-        required: true
-      },
-
-      genre: {
-        type: String,
-        required: true
-      }
     },
 
     computed: {
+      ...mapState(['userMovies']),
+
       isDark() {
         return this.$vuetify.theme.dark && '--dark'
+      },
+
+      isBookmarked() {
+        return this.userMovies.some(movie => movie.imdbID === this.movie.imdbID)
+      },
+
+      icon() {
+        return this.isBookmarked ? 'mdi-heart' : 'mdi-heart-outline'
+      }
+    },
+
+    methods: {
+      ...mapActions(['addMovie', 'removeMovie']),
+
+      markMovie() {
+        const action = this.isBookmarked ? this.removeMovie : this.addMovie
+        const success = action(this.movie)
+
+        if (success) {
+          this.$toast.success(
+            this.isBookmarked 
+              ? this.$t('movies.added')
+              : this.$t('movies.removed')
+          )
+        }        
       }
     }
   }

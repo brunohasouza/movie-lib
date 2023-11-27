@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 
+import './plugins/vua-toastification'
 import { vuetify } from './plugins/vuetify'
 import { store } from './store'
 import { i18n } from './i18n'
