@@ -1,5 +1,5 @@
 <template>
-  <v-main>
+  <v-main class="py-10">
     <movie-grid :loading="loading" :items="movies" :pages="pages" #default="{ item }">
       <movie-item
         :poster="item.Poster"
@@ -7,6 +7,18 @@
         :title="item.Title"
       ></movie-item>
     </movie-grid>
+    <v-container class="pt-10" v-if="!loading && movies.length > 0">
+      <v-row justify="center">
+        <v-col cols="auto">
+          <v-pagination
+            v-model="page"
+            :length="pages"
+            :total-visible="7"
+            @input="onChangePage"
+          ></v-pagination>
+        </v-col>
+      </v-row>
+    </v-container>
     <v-snackbar v-model="error" color="error" top multi-line>
       <p class="title mb-0">{{ errorMessage }}</p>
     </v-snackbar>
@@ -30,8 +42,8 @@
         error: false,
         errorMessage: '',
         page: 1,
-        loading: false,
         pages: 0,
+        loading: false,
       }
     },
 
@@ -42,6 +54,16 @@
     },
 
     methods: {
+      onChangePage(page) {
+        this.$router.push({
+          ...this.$route,
+          query: {
+            ...this.$route.query,
+            page
+          }
+        })
+      },
+
       async fetchMovies() {
         this.loading = true
         
@@ -64,8 +86,6 @@
             movies = []
             this.pages = 0
           }
-
-          this.loading = false
         } catch (error) {
           movies = []
           this.pages = 0
@@ -78,10 +98,24 @@
       },
     },
 
-    created() {
+    mounted() {
       if (this.title) {
         this.fetchMovies()
       }
-    }
+    },
+
+    created() {
+      const pageQuery = parseInt(this.$route.query.page)
+      this.page = !isNaN(pageQuery) && pageQuery >= 1 ? pageQuery : 1
+    },
+
+    watch: {
+      $route() {
+        const pageQuery = parseInt(this.$route.query.page)
+        this.page = !isNaN(pageQuery) && pageQuery >= 1 ? pageQuery : 1
+
+        this.fetchMovies()
+      },
+    },
   }
 </script>

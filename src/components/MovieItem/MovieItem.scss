@@ -1,4 +1,12 @@
 .movie-item {
+  --title-bg-color: transparent;
+  --poster-bg-color: rgba(0, 0, 0, .05);
+
+  &.--dark {
+    --title-bg-color: rgba(255, 255, 255, 0.1);
+    --poster-bg-color: rgba(255, 255, 255, 0.1);
+  }
+
   .poster {
     width: 100%;
     height: 0;
@@ -7,6 +15,14 @@
     background-position: center center;
     background-size: contain;
     background-repeat: no-repeat;
+    border-radius: .25rem;
+    background-color: var(--poster-bg-color);
+  }
+
+  &__title {
+    padding: .5rem;
+    border-radius: .25rem;
+    background-color: var(--title-bg-color);      
   }
 
   p {
@@ -14,5 +30,10 @@
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;  
     overflow: hidden;
+    margin: 0;
+
+    &.year {
+      opacity: .8;
+    }
   }
 }

@@ -1,8 +1,10 @@
 <template>
-  <div class="movie-item">
+  <div class="movie-item" :class="isDark">
     <span :style="{ backgroundImage: `url('${poster}')` }" class="poster mb-2"></span>
-    <p class="title mb-1" :title="title">{{ title }}</p>
-    <p class="body-1 mb-0">{{ genre }}</p>
+    <div class="movie-item__title">
+      <p class="title" :title="title">{{ title }}</p>
+      <p class="body-1 mb-0 year">{{ genre }}</p>
+    </div>
   </div>
 </template>
 
@@ -22,6 +24,12 @@
       genre: {
         type: String,
         required: true
+      }
+    },
+
+    computed: {
+      isDark() {
+        return this.$vuetify.theme.dark && '--dark'
       }
     }
   }

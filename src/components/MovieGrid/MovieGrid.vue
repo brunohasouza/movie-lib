@@ -17,11 +17,6 @@
         </v-col>
       </template>
     </v-row>
-    <v-row justify="end" v-if="!loading && items.length > 0">
-      <v-col cols="auto">
-        <v-pagination v-model="page" :length="pages" :total-visible="7"></v-pagination>
-      </v-col>
-    </v-row>
   </v-container>
 </template>
 
@@ -40,11 +35,6 @@
         type: Boolean,
         default: false
       },
-
-      pages: {
-        type: Number,
-        default: 0
-      }
     },
 
     components: {
