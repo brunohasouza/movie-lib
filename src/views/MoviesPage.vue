@@ -2,22 +2,22 @@
   <v-main class="py-10">
     <v-container>
       <v-row align="center">
-        <v-col cols="12">
-          <h1 class="display-2 text-center">{{ $t('movies.results', { keywords }) }}</h1>
-        </v-col>
-        <v-col>
-          <v-skeleton-loader v-if="loading" width="300" type="heading"></v-skeleton-loader>
-          <p v-else class="body-1 mb-0">{{ $t('movies.total', { number: totalMovies }) }}</p>
-        </v-col>
-        <v-col class="text-right">
-          <v-btn :to="{ name: 'home' }" color="primary">
-            <v-icon left>mdi-magnify</v-icon>
-            {{ $t('movies.newSearch') }}
-          </v-btn>
+        <v-col cols="12" class="text-center mb-6">
+          <app-logo></app-logo>
         </v-col>
       </v-row>
     </v-container>
-    <movie-grid :loading="loading" :items="movies" :pages="pages" #default="{ item }">
+    <results-header
+      v-if="loading || movies.length > 0"
+      :total="totalMovies"
+      :loading="loading"
+    ></results-header>
+    <movie-grid
+      :loading="loading"
+      :items="movies"
+      :pages="pages"
+      #default="{ item }"
+    >
       <movie-item
         :poster="item.Poster"
         :genre="item.Year"
@@ -45,12 +45,17 @@
 <script>
   import MovieGrid from '@/components/MovieGrid/MovieGrid.vue'
   import MovieItem from '@/components/MovieItem/MovieItem.vue'
+  import AppLogo from '@/components/AppLogo/AppLogo.vue';
+  import ResultsHeader from '@/components/ResultsHeader/ResultsHeader.vue'
+
   import { client } from '@/service/http-client';
 
   export default {
     components: {
       MovieGrid,
-      MovieItem
+      MovieItem,
+      AppLogo,
+      ResultsHeader
     },
 
     data() {
@@ -61,7 +66,6 @@
         page: 1,
         totalMovies: 0,
         loading: false,
-        keywords: decodeURIComponent(this.$route.query.title)
       }
     },
 

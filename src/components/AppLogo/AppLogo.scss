@@ -1,0 +1,54 @@
+.app-logo {
+  --gap: .5rem;
+  --icon-size: 4rem;
+  --first-title-size: .75rem;
+  --first-title-margin: 2px;
+  --second-title-size: 2rem;
+
+  &.--large {
+    --gap: .75rem;
+    --icon-size: 6rem;
+    --first-title-size: 1rem;
+    --first-title-margin: .25rem;
+    --second-title-size: 3rem;
+
+    @media (min-width: 600px) {
+      --gap: 1rem;
+      --icon-size: 8rem;
+      --first-title-size: 1.5rem;
+      --first-title-margin: .5rem;
+      --second-title-size: 4rem;
+    }
+  }
+
+  display: inline-flex;
+  gap: var(--gap);
+  align-items: center;
+  width: max-content;
+  flex: none;
+
+  &__icon {
+    font-size: var(--icon-size);
+  }
+
+  &__content {
+    p {
+      margin: 0;
+      line-height: 100%;
+      font-weight: 500;
+      text-transform: uppercase;
+      display: block;
+      text-align: left;
+
+      &:first-child {
+        font-size: var(--first-title-size);
+        margin-bottom: var(--first-title-margin);
+        opacity: .8;
+      }
+
+      &:last-child {
+        font-size: var(--second-title-size);
+      }
+    }
+  }
+}

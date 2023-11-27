@@ -1,9 +1,16 @@
 <template>
   <v-main>
     <v-container fill-height fluid>
-      <v-row no-gutters justify="center" align="center">
+      <v-row justify="center" align="center">
+        <v-col cols="12" class="text-center mb-6">
+          <app-logo large></app-logo>
+        </v-col>
         <v-col md="6">
-          <v-form ref="searchForm" v-model="valid" @submit.prevent="onSubmit">
+          <v-form
+            ref="searchForm"
+            v-model="valid"
+            @submit.prevent="onSubmit"
+          >
             <v-text-field
               v-model="search"
               :rules="searchRules"
@@ -20,7 +27,12 @@
 </template>
 
 <script>
+  import AppLogo from '@/components/AppLogo/AppLogo.vue'
   export default {
+    components: {
+      AppLogo
+    },
+
     data() {
       return {
         search: '',
