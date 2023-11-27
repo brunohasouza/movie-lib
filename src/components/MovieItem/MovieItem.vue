@@ -2,8 +2,8 @@
   <div class="movie-item" :class="isDark">
     <span :style="{ backgroundImage: `url('${poster}')` }" class="poster mb-2"></span>
     <div class="movie-item__title">
-      <p class="title" :title="title">{{ title }}</p>
-      <p class="body-1 mb-0 year">{{ genre }}</p>
+      <p class="text-subtitle-1 font-weight-medium" :title="title">{{ title }}</p>
+      <p class="text-body-1 text--disabled mb-0 year">{{ genre }}</p>
     </div>
   </div>
 </template>

@@ -3,8 +3,8 @@
   --poster-bg-color: rgba(0, 0, 0, .05);
 
   &.--dark {
-    --title-bg-color: rgba(255, 255, 255, 0.1);
-    --poster-bg-color: rgba(255, 255, 255, 0.1);
+    --title-bg-color: rgba(255, 255, 255, 0.08);
+    --poster-bg-color: rgba(255, 255, 255, 0.08);
   }
 
   .poster {
@@ -31,9 +31,5 @@
     -webkit-box-orient: vertical;  
     overflow: hidden;
     margin: 0;
-
-    &.year {
-      opacity: .8;
-    }
   }
 }

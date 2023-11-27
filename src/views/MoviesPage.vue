@@ -1,5 +1,22 @@
 <template>
   <v-main class="py-10">
+    <v-container>
+      <v-row align="center">
+        <v-col cols="12">
+          <h1 class="display-2 text-center">{{ $t('movies.results', { keywords }) }}</h1>
+        </v-col>
+        <v-col>
+          <v-skeleton-loader v-if="loading" width="300" type="heading"></v-skeleton-loader>
+          <p v-else class="body-1 mb-0">{{ $t('movies.total', { number: totalMovies }) }}</p>
+        </v-col>
+        <v-col class="text-right">
+          <v-btn :to="{ name: 'home' }" color="primary">
+            <v-icon left>mdi-magnify</v-icon>
+            {{ $t('movies.newSearch') }}
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
     <movie-grid :loading="loading" :items="movies" :pages="pages" #default="{ item }">
       <movie-item
         :poster="item.Poster"
@@ -42,14 +59,19 @@
         error: false,
         errorMessage: '',
         page: 1,
-        pages: 0,
+        totalMovies: 0,
         loading: false,
+        keywords: decodeURIComponent(this.$route.query.title)
       }
     },
 
     computed: {
       title() {
         return decodeURIComponent(this.$route.query.title)
+      },
+
+      pages() {
+        return Math.ceil(this.totalMovies / 10)
       }
     },
 
@@ -81,14 +103,14 @@
 
           if (Response === 'True') {
             movies = Search
-            this.pages = Math.ceil(parseInt(totalResults) / 10)
+            this.totalMovies = parseInt(totalResults)
           } else {
             movies = []
-            this.pages = 0
+            this.totalMovies = 0
           }
         } catch (error) {
           movies = []
-          this.pages = 0
+          this.totalMovies = 0
           this.errorMessage = this.$t('movies.apiError')
           this.error = true
         }
