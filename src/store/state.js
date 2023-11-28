@@ -2,6 +2,6 @@ import { getMovies } from "@/service/cache-movies";
 import { getRatings } from "@/service/cache-ratings";
 
 export default {
-  userMovies: getMovies(),
+  bookmarkList: getMovies(),
   ratings: getRatings()
 }

@@ -1,4 +1,8 @@
 export default {
+  favoriteMovies: {
+    title: 'Favorite Movies ({number})'
+  },
+
   validations: {
     required: '{field} is required'
   },

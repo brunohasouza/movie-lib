@@ -1,5 +1,5 @@
 <template>
-  <v-main class="py-10">
+  <v-main class="py-12">
     <v-container>
       <v-row align="center">
         <v-col cols="12" class="text-center mb-6">

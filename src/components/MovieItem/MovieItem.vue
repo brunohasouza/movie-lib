@@ -51,14 +51,14 @@
     },
 
     computed: {
-      ...mapState(['userMovies', 'ratings']),
+      ...mapState(['bookmarkList', 'ratings']),
 
       isDark() {
         return this.$vuetify.theme.dark && '--dark'
       },
 
       isBookmarked() {
-        return this.userMovies.some(movie => movie.imdbID === this.movie.imdbID)
+        return this.bookmarkList.some(movie => movie.imdbID === this.movie.imdbID)
       },
 
       icon() {

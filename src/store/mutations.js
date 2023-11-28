@@ -6,8 +6,8 @@ export const UPDATE_RATINGS = 'UPDATE_RATINGS'
 
 export default {
   [UPDATE_MOVIES](state, movies) {
-    state.userMovies = movies
-    updateMovies(state.userMovies)
+    state.bookmarkList = movies
+    updateMovies(state.bookmarkList)
   },
 
   [UPDATE_RATINGS](state, ratings) {
