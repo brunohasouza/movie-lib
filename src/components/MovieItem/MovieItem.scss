@@ -1,9 +1,7 @@
 .movie-item {
-  --title-bg-color: transparent;
   --poster-bg-color: rgba(0, 0, 0, .05);
 
   &.--dark {
-    --title-bg-color: rgba(255, 255, 255, 0.08);
     --poster-bg-color: rgba(255, 255, 255, 0.08);
   }
 
@@ -26,10 +24,25 @@
     top: 0;
   }
 
+  .stars {
+    display: flex; 
+    align-items: center;
+    gap: 2px;
+    margin-bottom: .25rem;
+    margin-left: -2px;
+
+    span {
+      width: max-content;
+      display: block;
+      flex: none;
+      cursor: pointer;
+    }
+  }
+
   &__title {
     padding: .5rem;
     border-radius: .25rem;
-    background-color: var(--title-bg-color);      
+    padding-top: 0;
   }
 
   p {

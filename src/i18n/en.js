@@ -14,6 +14,7 @@ export default {
     total: 'Total results: {number}',
     removed: 'Movie removed successfully',
     added: 'Movie added successfully',
+    rated: 'Movie rated successfully',
     apiError: 'Sorry, an unknown error occurred.',
     notFound: {
       title: 'No Results Found',

@@ -1,4 +1,4 @@
-import { UPDATE_MOVIES } from "./mutations"
+import { UPDATE_MOVIES, UPDATE_RATINGS } from "./mutations"
 
 export default {
   addMovie({ commit, state }, movie) {
@@ -27,5 +27,12 @@ export default {
     commit(UPDATE_MOVIES, userMovies)
 
     return true
+  },
+
+  rateMovie({ commit, state }, { imdbID, stars }) {
+    commit(UPDATE_RATINGS, {
+      ...state.ratings,
+      [imdbID]: stars
+    })
   }
 }
