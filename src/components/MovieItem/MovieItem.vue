@@ -1,9 +1,7 @@
 <template>
   <div class="movie-item" :class="isDark">
     <span :style="{ backgroundImage: `url('${movie.Poster}')` }" class="poster mb-2">
-      <v-btn fab small color="red" class="fav-btn" @click="markMovie">
-        <v-icon>{{ icon }}</v-icon>
-      </v-btn>
+      <favorite-ribbon class="fav-btn" :active="isBookmarked" @click="markMovie"></favorite-ribbon>
     </span>
     <div class="movie-item__title">
       <p class="text-subtitle-1 font-weight-medium" :title="movie.Title">{{ movie.Title }}</p>
@@ -13,6 +11,7 @@
 </template>
 
 <script>
+  import FavoriteRibbon from '@/components/FavoriteRibbon/FavoriteRibbon.vue'
   import { mapActions, mapState } from 'vuex'
 
   export default {
@@ -21,6 +20,10 @@
         type: Object,
         required: true
       },
+    },
+
+    components: {
+      FavoriteRibbon
     },
 
     computed: {

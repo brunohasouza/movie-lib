@@ -1,0 +1,64 @@
+.ribbon {    
+    --ribbon-base-bg: 31,31,31;
+    --ribbon-base-stroke: 255,255,255;
+
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+    cursor: pointer;
+    width: max-content;
+    height: max-content;
+    display: inline-flex;
+    flex: none;
+    position: relative;
+    transition: stroke .2s ease-in-out;
+    width: 2rem;
+
+    &__icon {
+        position: absolute;
+        top: .25rem;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+
+    &__svg {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .svg {
+        &-ribbon {
+            fill: rgba(31, 31, 31, .75);
+            stroke: rgba(255, 255, 255, .8);
+        }
+    
+        &-hover {
+            fill: rgba(255, 255, 255, .32);
+            opacity: 0;
+            transition: opacity .2s ease-in-out;
+        }
+    
+        &-shadow {
+            fill: rgba(0,0,0,.32);
+        }
+    }
+
+    &.--active {
+        .svg {
+            &-ribbon {
+                fill: #FFB300;
+                stroke: none;
+            }
+
+            &-hover {
+                fill: rgba(0, 0, 0, .2);
+            }
+
+            &-shadow {
+                fill: none;
+            }
+        }
+    }
+}
