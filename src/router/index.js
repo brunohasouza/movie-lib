@@ -15,6 +15,10 @@ const routes = [
     path: '/movies',
     name: 'movies',
     component: MoviesPage
+  },
+  {
+    path: '*',
+    redirect: { name: 'home' }
   }
 ]
 
