@@ -13,7 +13,7 @@
       <bookmark-list></bookmark-list>
     </v-navigation-drawer>
     <v-app-bar app color="primary" dense :collapse="true">
-      <v-btn icon @click="drawer = !drawer">
+      <v-btn icon @click="drawer = !drawer" dark>
         <v-icon>mdi-bookmark-outline</v-icon>
       </v-btn>
     </v-app-bar>
